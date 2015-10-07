@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<meta charset="UTF-8">
+	<title>七巧板</title>
+</head>
+<body style="width: 100%;">
+	<canvas id="canvas"></canvas>
+	<script type="text/javascript">
+		//使用数组存储七巧板点的坐标和颜色
+		var tangram=[
+			{p:[{x:0,y:0},{x:0,y:500},{x:250,y:250}],color:'#5FB6D1'},
+			{p:[{x:0,y:0},{x:250,y:250},{x:500,y:0}],color:'#CCF163'},
+			{p:[{x:500,y:250},{x:500,y:500},{x:250,y:500}],color:'#FCC522'},
+			{p:[{x:0,y:500},{x:250,y:500},{x:125,y:375}],color:'#FE9CCF'},
+			{p:[{x:125,y:375},{x:250,y:250},{x:375,y:375},{x:250,y:500}],color:'#A898C5'},
+			{p:[{x:250,y:250},{x:375,y:125},{x:375,y:375}],color:'#FDEA12'},
+			{p:[{x:375,y:125},{x:375,y:375},{x:500,y:250},{x:500,y:0}],color:'#FF4F63'}
+		];
+
+		window.onload=function()
+		{
+			//获取当前操作的画布
+			var canvas=document.getElementById("canvas");
+			canvas.width=500;
+			canvas.height=500;
+			canvas.style.cssText="border:2px solid gray;margin:0 300px";
+			//设置在画布中画的是2d图像
+			var context=canvas.getContext("2d");
+			draw(tangram,context);
+		}
+		
+
+		 function draw(tangram,cxt)
+		 {
+		 	for (var i = 0; i < tangram.length; i++) 
+			{
+				var points=tangram[i].p;
+				cxt.fillStyle=tangram[i].color;				
+				cxt.beginPath();
+				cxt.moveTo(points[0].x,points[0].y);
+				for (var j = 1; j < points.length; j++) 
+				{
+					cxt.lineTo(points[j].x,points[j].y);
+				}
+				cxt.closePath();
+				cxt.fill()
+				cxt.strokeStyle="#000000";
+				cxt.lineWidth=3;
+				cxt.stroke();
+			}
+		}
+
+	</script>
+</body>
+
+</html>
